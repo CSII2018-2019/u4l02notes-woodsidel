@@ -1,4 +1,7 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -35,6 +38,16 @@ public class ImagePanel extends JPanel {
 	}
 	public void paintComponent(Graphics g) {
 		g.drawImage(image, 0, 0, null);
+		//title Panel
+				Font titleFont = new  Font ("Times New Roman", Font.PLAIN, 40);
+				g.setFont(titleFont);
+				g.drawString("When You Realize You Messed Up",25, 100);
+				setForeground(Color.WHITE);
+				
+	}
+	public Dimension getPreferredSize() {
+		Dimension size = new Dimension(width, height);
+		return size;
 	}
 
 }

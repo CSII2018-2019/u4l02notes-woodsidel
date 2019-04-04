@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 
 public class U4L02Notes extends JFrame {
 	
-	public static final String FILE_NAME = "/StarWarsKid.png";
+	public static final String FILE_NAME = "/SorsBandeam.png";
 	
 	public U4L02Notes(){
 		initGUI();

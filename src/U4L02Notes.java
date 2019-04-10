@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 
 public class U4L02Notes extends JFrame {
 	
-	public static final String FILE_NAME = "/SorsBandeam.png";
+	public static final String FILE_NAME = "/Spider-Man.jpg";
 	
 	public U4L02Notes(){
 		initGUI();
@@ -28,7 +28,24 @@ public class U4L02Notes extends JFrame {
 		
 		//image panel
 		ImagePanel imgPanel = new ImagePanel(FILE_NAME);
-		add(imgPanel, BorderLayout.CENTER);
+		add(imgPanel, BorderLayout.WEST);
+		
+		//grayscale image panel
+		ImagePanel grayscale = new ImagePanel(FILE_NAME);
+		String type = "g";
+		grayscale.convertToGrayscale(type);
+		add(grayscale, BorderLayout.EAST);
+		
+		//avengers image panel
+				//ImagePanel Avengers = new ImagePanel(FILE_NAME);
+				//type = "a";
+				//Avengers.convertToGrayscale(type);
+				//add(Avengers, BorderLayout.CENTER);
+		//negative image panel
+				ImagePanel Negative = new ImagePanel(FILE_NAME);
+				type = "n";
+				Negative.convertToGrayscale(type);
+				add(Negative, BorderLayout.CENTER);
 }
 	
 

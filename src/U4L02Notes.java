@@ -26,7 +26,6 @@ public class U4L02Notes extends JFrame {
 	}
 	
 	public void initGUI(){
-		
 		String type = JOptionPane.showInputDialog("What Filter Do You Want? \nFilters: Grayscale, Avengers, Negative, Sepia");
 		if(type == "Grayscale") {
 		//grayscale image panel
@@ -52,7 +51,13 @@ public class U4L02Notes extends JFrame {
 				Sepia.convertToSepia(type);
 				add(Sepia, BorderLayout.CENTER);		
 		}
+		else {
+		//normal image panel
+		ImagePanel imgPanel = new ImagePanel(FILE_NAME);
+		add(imgPanel, BorderLayout.CENTER);
 		}
+		}
+		
 	
 
 	public static void main(String[] args) {

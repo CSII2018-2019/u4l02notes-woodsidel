@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -26,27 +27,32 @@ public class U4L02Notes extends JFrame {
 	
 	public void initGUI(){
 		
-		//image panel
-		ImagePanel imgPanel = new ImagePanel(FILE_NAME);
-		add(imgPanel, BorderLayout.WEST);
-		
+		String type = JOptionPane.showInputDialog("What Filter Do You Want? \nFilters: Grayscale, Avengers, Negative, Sepia");
+		if(type == "Grayscale") {
 		//grayscale image panel
 		ImagePanel grayscale = new ImagePanel(FILE_NAME);
-		String type = "g";
 		grayscale.convertToGrayscale(type);
-		add(grayscale, BorderLayout.EAST);
-		
+		add(grayscale, BorderLayout.CENTER);
+		}
+		else if(type == "Avengers") {
 		//avengers image panel
-				//ImagePanel Avengers = new ImagePanel(FILE_NAME);
-				//type = "a";
-				//Avengers.convertToGrayscale(type);
-				//add(Avengers, BorderLayout.CENTER);
+				ImagePanel Avengers = new ImagePanel(FILE_NAME);
+				Avengers.convertToAvengers(type);
+				add(Avengers, BorderLayout.CENTER);
+		}
+		else if(type == "Negative") {
 		//negative image panel
 				ImagePanel Negative = new ImagePanel(FILE_NAME);
-				type = "n";
-				Negative.convertToGrayscale(type);
+				Negative.convertToNegative(type);
 				add(Negative, BorderLayout.CENTER);
-}
+		}
+		else if(type == "Sepia") {
+		//sepia image panel
+				ImagePanel Sepia = new ImagePanel(FILE_NAME);
+				Sepia.convertToSepia(type);
+				add(Sepia, BorderLayout.CENTER);		
+		}
+		}
 	
 
 	public static void main(String[] args) {

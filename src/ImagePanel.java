@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel {
 	
 	//what variables are needed?
-	private int width;
-	private int height;
+	private static int width;
+	private static int height;
 	
-	BufferedImage image = null;
+	static BufferedImage image = null;
 	
 	public ImagePanel(String fn){
 		image = readImageFile(this, fn);
@@ -49,6 +49,7 @@ public class ImagePanel extends JPanel {
 	}
 	
 	public void convertToGrayscale(String type) {
+		if(type == "Grayscale") {
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				//get value for 1 pixel
@@ -59,42 +60,96 @@ public class ImagePanel extends JPanel {
 				int g = (p >> 8) & 0xff;
 				int b = (p >> 0) & 0xff;
 				
+				int avg = (r+g+b)/3;
+				
+				p = (a << 24) | (avg << 16) | (avg << 8) | (avg << 0);
+					image.setRGB(x, y, p);
+			}
+		}
+		}		
+	}
+	public void convertToSepia(String type) {
+		if(type == "Sepia") {
+		for(int x = 0; x < width; x++) {
+			for(int y = 0; y < height; y++) {
+				//get value for 1 pixel
+				int p = image.getRGB(x, y);
+				
+				int a = (p >> 24) & 0xff;
+				int r = (p >> 16) & 0xff;
+				int g = (p >> 8) & 0xff;
+				int b = (p >> 0) & 0xff;
+				
+				int avg = (r+g+b)/3;
+				
+				int newRed = (int)(0.393*r + 0.769*g + 0.189*b);
+				int newGreen = (int)(0.349*r + 0.686*g + 0.168*b);
+				int newBlue = (int)(0.272*r + 0.534*g + 0.131*b);
+				
+				if(newRed > 255) {
+					newRed = 255;	
+				}
+				if(newGreen > 255) {
+					newGreen = 255;
+				}
+				if(newBlue > 255) {
+					newBlue = 255;
+				}
+				
+				p = (a << 24) | (newRed << 16) | (newGreen << 8) | (newBlue << 0);
+				image.setRGB(x, y, p);
+			}
+		}
+		}
+	}
+
+	public void convertToAvengers(String type) {
+		if(type == "Avengers") {
+		for(int x = 0; x < width; x++) {
+			for(int y = 0; y < height; y++) {
+				//get value for 1 pixel
+				int p = image.getRGB(x, y);
+				
+				int a = (p >> 24) & 0xff;
+				int r = (p >> 16) & 0xff;
+				int g = (p >> 8) & 0xff;
+				int b = (p >> 0) & 0xff;
+				
+				
 				//calculate average
 				int redAverage = (g+b)/2;
 				int avg = (r+g+b)/3;
-				//reset our pixel
-				if(type.equals("g")) {
-					p = gscale(avg, a, p);
-					image.setRGB(x, y, p);
-				}
-				if(type.equals("a")) {
-				p = avengers(a, p, avg, redAverage);
-				image.setRGB(x, y, p); 
-				}
-				if(type.equals("n")) {
-				p = negative(a, p, avg, r, g, b);
+				
+				p = (a << 24) | (redAverage << 16) | (avg << 8) | (avg << 0);
 				image.setRGB(x, y, p);
-				}
-				
-				
-				
-				}
+		
 			}
 		}
-	public static int gscale(int average, int a1, int p1) {
-		
-		p1 = (a1 << 24) | (average << 16) | (average << 8) | (average << 0);
-		return p1;
 		}
-	public static int avengers(int a1, int p1, int average, int redAvg) {
-		
-		p1 = (a1 << 24) | (redAvg << 16) | (average << 8) | (average << 0);
-		return p1;
 	}
-	public static int negative(int a1, int p1, int average, int r1, int g1, int b1) {
+	public void convertToNegative(String type) {
 		//negative image
-		p1 = (a1 << 24) | (255-r1 << 16) | (255-g1 << 8) | (255-b1 << 0);
-		return p1;
+		if(type == "Negative") {
+		for(int x = 0; x < width; x++) {
+			for(int y = 0; y < height; y++) {
+				//get value for 1 pixel
+				int p = image.getRGB(x, y);
+				
+				int a = (p >> 24) & 0xff;
+				int r = (p >> 16) & 0xff;
+				int g = (p >> 8) & 0xff;
+				int b = (p >> 0) & 0xff;
+				
+				
+				//calculate average
+				int avg = (r+g+b)/3;
+				p = (a << 24) | (255-r << 16) | (255-g << 8) | (255-b << 0);
+				
+				image.setRGB(x,  y, p);
+
+			}
+		}
+		}
 	}
 	
 	
